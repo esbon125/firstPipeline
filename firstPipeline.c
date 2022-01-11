@@ -85,6 +85,9 @@ glAttachShader(program,geometry_shader);
 glLinkProgram(program);
 glUseProgram(program);
 
+GLint status;
+glGetProgramiv(program,GL_INFO_LOG_LENGTH,&status);
+printf("%d\n",status);
 
 GLchar infolog[1024];GLint length;
 glGetProgramInfoLog(program,1024,&length,infolog);
@@ -129,13 +132,16 @@ void display()
     GLfloat attrib[]={  (float)(sin(currentTime))*0.5f,
                         (float)(cos(currentTime))*0.6f,
                         0.f,0.f };
+GLfloat color[]={  0.f,(float)(cos(currentTime))*0.5f+0.5f,
+                        (float)(sin(currentTime))*0.5f+0.5f,0.f };                        
+
     glVertexAttrib4fv(0,attrib);
+    glVertexAttrib4fv(1,color);
     
-    
-    glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glPatchParameteri(GL_PATCH_VERTICES,3);
-    glPointSize(5.0f);
-    glDrawArrays(GL_PATCHES,0,3);
+    //glPointSize(5.0f);
+    glDrawArrays(GL_TRIANGLE_STRIP,0,3);
     glutPostRedisplay();
     glutSwapBuffers();
     return;
