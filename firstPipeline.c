@@ -85,7 +85,7 @@ glAttachShader(program,geometry_shader);
 glLinkProgram(program);
 glUseProgram(program);
 
-GLint status;
+/*GLint status;
 glGetProgramiv(program,GL_INFO_LOG_LENGTH,&status);
 printf("%d\n",status);
 
@@ -97,7 +97,7 @@ while(infolog[i]!='\0')
 {
     putc(infolog[i], infologFile);
 }
-
+*/
 
 glDeleteShader(vertex_shader);
 glDeleteShader(fragment_shader);
@@ -123,7 +123,7 @@ void display()
 {  
     double currentTime=glutGet(GLUT_ELAPSED_TIME);
     
-    glClearColor(0.0f , 0.f , 0.f , 1.f);
+    glClearColor(1.0f , 0.f , 0.f , 1.f);
     glClear(GL_COLOR_BUFFER_BIT);
     
 
@@ -138,10 +138,10 @@ GLfloat color[]={  0.f,(float)(cos(currentTime))*0.5f+0.5f,
     glVertexAttrib4fv(0,attrib);
     glVertexAttrib4fv(1,color);
     
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
     glPatchParameteri(GL_PATCH_VERTICES,3);
-    //glPointSize(5.0f);
-    glDrawArrays(GL_TRIANGLE_STRIP,0,3);
+    glPointSize(5.0f);
+    glDrawArrays(GL_PATCHES,0,3);
     glutPostRedisplay();
     glutSwapBuffers();
     return;
