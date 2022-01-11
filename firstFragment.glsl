@@ -1,5 +1,5 @@
 #version 450 core
-in TES_COLOR
+in GEOM_COLOR
 {
     vec4 color;
 }in_color;
