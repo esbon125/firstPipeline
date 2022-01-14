@@ -1,0 +1,19 @@
+Primitive Assembly, clipping and rasterization.
+
+Primitive Assembly: consists of grouping vertices into lines and trinagles. This is done also for
+points, in which case it's trivial. 
+
+Clipping: once primitives have been built up from their individual vertices, they are clipped against
+the displayable region, that is usually the window or the screen, but sometimes refer to a smaller one
+known as the viewport. 
+
+Rasterization: fixed-function process that determines the pixels covered by the primitive and send
+them to the next stage, that is the fragment shading.
+
+Through all the front-end, homogeneous coordinates are used. Right before clipping, projective
+division takes place, which converts from homogeneous to cartesian coordinates.
+
+Culling: optional stage in which is decided whether a triangle faces towards or away the viewer.
+If it's towards, it's called front-facing, otherwise is called back-facing. This determined by the
+by the sign of the area of the triangle. If it's positive, it's front-facing, if negative back-facing.
+
